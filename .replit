@@ -6,3 +6,13 @@ stack = "BEST_EFFORT_FALLBACK"
 [nix]
 channel = "stable-25_05"
 packages = ["glibcLocales"]
+
+[userenv]
+
+[userenv.shared]
+GOOGLE_PLACES_API_KEY = "AIzaSyCDdFIsXCoNCvLze3gDQOkNEH1PrtxWEmE"
+GMAIL_ADDRESS = "jake@northernbeacheswebco.com"
+GMAIL_APP_PASSWORD = "buytriidpsrbpmjw"
+SENDER_NAME = "Jake Mitchell"
+DAILY_EMAIL_LIMIT = "300"
+DELAY_BETWEEN_EMAILS = "30"
