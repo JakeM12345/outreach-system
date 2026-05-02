@@ -1,0 +1,40 @@
+name: Follow-up Emails
+
+on:
+  schedule:
+    # 9am AEST (Sydney) Mon–Thu = 11pm UTC Sun–Wed
+    # Runs same time as outreach — followup.py checks the date internally
+    - cron: "0 23 * * 0,1,2,3"
+  workflow_dispatch:
+
+jobs:
+  send-followups:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send follow-up emails
+        env:
+          GMAIL_ADDRESS:        ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD:   ${{ secrets.GMAIL_APP_PASSWORD }}
+          SENDER_NAME:          ${{ secrets.SENDER_NAME }}
+          DELAY_BETWEEN_EMAILS: ${{ secrets.DELAY_BETWEEN_EMAILS }}
+        run: python followup.py
+
+      - name: Commit updated sent_log.csv back to repo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sent_log.csv || true
+          git diff --staged --quiet || git commit -m "Update follow-up log [skip ci]"
+          git push
