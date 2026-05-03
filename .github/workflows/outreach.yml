@@ -17,7 +17,16 @@ jobs:
       - name: Scrape fresh leads
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
-        run: python main.py --query "tradies" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv
+        run: |
+          python main.py --query "electrician" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv
+          python main.py --query "plumber" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "builder" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "painter" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "landscaper" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "cleaner" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "concretor" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "tiler" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
+          python main.py --query "carpenter" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file leads.csv --append
       - name: Enrich leads
         env:
           HUNTER_API_KEY: ${{ secrets.HUNTER_API_KEY }}
