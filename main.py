@@ -17,7 +17,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Automated outreach system")
     parser.add_argument("--query",       default="digital marketing agencies", help="Business type to search for")
     parser.add_argument("--location",    default="Los Angeles, CA",            help="City / region to search in")
-    parser.add_argument("--leads-file",  default="leads.csv",                  help="Path to leads CSV")
+    parser.add_argument("--leads-file",  default="Northern Beaches, Sydney, Australia",                  help="Path to leads CSV")
     parser.add_argument("--template",    default="templates/outreach.html",    help="HTML email template")
     parser.add_argument("--subject",     default="Quick question about {{name}}", help="Email subject line")
     parser.add_argument("--scrape-only", action="store_true",  help="Only scrape — skip sending emails")
