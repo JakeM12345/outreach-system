@@ -51,7 +51,7 @@ def find_email(domain: str) -> str:
     return ""
 
 
-def enrich_leads(leads_file: str = "leads.csv") -> None:
+def enrich_leads(leads_file: str = "all_leads_northern_beaches.csv") -> None:
     """
     Read leads.csv, look up emails via Hunter.io, write results back.
     Skips leads that already have an email address.
