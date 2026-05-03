@@ -17,8 +17,7 @@ jobs:
       - name: Scrape fresh leads
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
-        run: python main.py --query "tradies" --location "Northern Beaches, Sydney, Australia" --scrape-only --leads-file all_leads_northern_beaches.csv
-      - name: Enrich leads
+        run: python emailer.py
         env:
           HUNTER_API_KEY: ${{ secrets.HUNTER_API_KEY }}
         run: python enrich.py
