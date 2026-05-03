@@ -14,6 +14,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
+      - name: Scrape fresh leads
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: python places_scraper.py --query "tradies Northern Beaches Sydney" --output all_leads_northern_beaches.csv
       - name: Enrich leads
         env:
           HUNTER_API_KEY: ${{ secrets.HUNTER_API_KEY }}
@@ -26,7 +30,7 @@ jobs:
           SENDER_NAME: ${{ secrets.SENDER_NAME }}
           DAILY_EMAIL_LIMIT: ${{ secrets.DAILY_EMAIL_LIMIT }}
           DELAY_BETWEEN_EMAILS: ${{ secrets.DELAY_BETWEEN_EMAILS }}
-        run: python main.py --email-only --leads-file all_leads_northern_beaches.csv --no-push
+        run: python emailer.py --leads-file all_leads_northern_beaches.csv
       - name: Save logs
         run: |
           git config user.name "github-actions[bot]"
